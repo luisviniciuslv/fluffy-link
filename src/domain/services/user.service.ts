@@ -4,6 +4,7 @@ import generateRandomString from "../../shared/utils/generateRandomString";
 import { validateRedirectPayload } from "../../shared/utils/validateRedirectPayload";
 import { IUser, Redirect } from "../entities/user.entity";
 import { IUserRepository } from "../interfaces/user.repository.interface";
+import { RedirectNotFound } from "../../exceptions/redirect-not-found";
 
 export default class UserService {
   constructor(private userRepository: IUserRepository) {}
@@ -40,5 +41,13 @@ export default class UserService {
     redirect._id = new Date().getTime().toString();
     user.redirects.push(redirect);
     await this.userRepository.update(id, user);
+  }
+
+  public async deleteRedirect (id: ObjectId, redirectId: string): Promise<void> {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new UserNotFoundException();
+    if (!user.redirects.some(r => r._id === redirectId)) throw new RedirectNotFound("Redirect not found");
+    user.redirects = user.redirects.filter(r => r._id !== redirectId);
+    this.userRepository.update(id, user);
   }
 }

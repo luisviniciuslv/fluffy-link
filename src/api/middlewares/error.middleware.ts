@@ -10,6 +10,7 @@ import { Unauthorized } from "../../exceptions/unauthorized-exception";
 import { UserAlreadyExistsException } from "../../exceptions/user-already-exists";
 import { RedirectPayloadIsNotValid } from "../../exceptions/redirect-payload-not-valid";
 import { UsernameOrEmailOrPasswordNotProvided } from "../../exceptions/username-email-or-password-not-provided";
+import { RedirectNotFound } from "../../exceptions/redirect-not-found";
 
 export interface ErrorResponse {
   message: string;
@@ -44,5 +45,7 @@ export const errorHandler = (
     res.status(400).json({ message: err.message }).send
   else if (err instanceof UsernameOrEmailOrPasswordNotProvided)
     res.status(400).json({ message: err.message }).send();
+  else if (err instanceof RedirectNotFound)
+    res.status(404).json({ message: err.message }).send();
   else{console.log(err); res.status(500).json({ message: "Internal Server Error" }).send();}
 };

@@ -9,5 +9,5 @@ const userController = new UserController(userService);
 
 router.post("/redirect", authMiddleware, userController.registerRedirect)
 router.get("/redirect", authMiddleware, userController.getRedirects)
-// router.delete("/redirect/:id", authMiddleware, userController.deleteRedirect)
+router.delete("/redirect/:id", authMiddleware, userController.deleteRedirect)
 export default router;

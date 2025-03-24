@@ -34,4 +34,19 @@ export default class UserController {
       next(error);
     }
   };
+
+  public deleteRedirect = async (
+    req : Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userId = req.headers['x-user-id'] as unknown as ObjectId;
+      const redirectId = req.params.id;
+      await this.userService.deleteRedirect(userId, redirectId);
+      res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
