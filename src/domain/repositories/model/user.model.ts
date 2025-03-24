@@ -4,6 +4,7 @@ import { IUser } from "../../entities/user.entity";
 const filedIsRequires = [true, "Field is required"];
 
 const UserAccountSchema = new Schema({
+  username: { type: String, required: filedIsRequires },
   email: { type: String, required: filedIsRequires },
   password: { type: String, required: filedIsRequires },
   redirects: { type: [], required: false, default: [] },

@@ -16,12 +16,17 @@ export default class CreationAccountService {
   ) {}
 
   public async createCreationRequest(
+    username: string,
     email: string,
     password: string
   ): Promise<void> {
     const userEmail = await this.userRepository.findByEmail(email);
     if (userEmail)
       throw new UserAlreadyExistsException("User email already exists");
+
+    const usernameExists = await this.userRepository.findByUsername(username);
+    if (usernameExists)
+      throw new UserAlreadyExistsException("Username already exists");
 
     password = await encryptStr(password);
 
@@ -37,6 +42,7 @@ export default class CreationAccountService {
 
     const code = this.generateCode();
     await this.creationAccountCodeRepository.create({
+      username,
       email,
       password,
       code,
@@ -67,7 +73,9 @@ export default class CreationAccountService {
     await this.creationAccountCodeRepository.deleteByEmail(email);
 
     const password = creationRequest.password;
-    await this.userRepository.create({ email, password });
+    const username = creationRequest.username;
+    
+    await this.userRepository.create({ username, email, password });
   }
 
   private generateCode(): string {

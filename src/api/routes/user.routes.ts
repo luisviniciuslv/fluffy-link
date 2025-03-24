@@ -1,10 +1,13 @@
 import { Router } from "express";
 import UserController from "../controllers/user.controller";
-import { userService } from "../../shared/serverInstances";
+import { authService, userService } from "../../shared/serverInstances";
+import createAuthMiddleware from "../middlewares/auth.middleware";
 
 const router = Router();
-
+const authMiddleware = createAuthMiddleware(userService);
 const userController = new UserController(userService);
-router.get("/:id", userController.getUser);
 
+router.post("/redirect", authMiddleware, userController.registerRedirect)
+router.get("/redirect", authMiddleware, userController.getRedirects)
+// router.delete("/redirect/:id", authMiddleware, userController.deleteRedirect)
 export default router;

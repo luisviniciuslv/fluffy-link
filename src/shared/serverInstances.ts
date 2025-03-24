@@ -2,9 +2,10 @@ import UserRepository from "../domain/repositories/user.repository";
 import CreationAccountRepository from "../domain/repositories/creationAccount.repository";
 import UserService from "../domain/services/user.service";
 import CreationAccountService from "../domain/services/creationAccount.service";
+import AuthService from "../domain/services/auth.service";
 
 // repositories
-const userRepository = new UserRepository();
+export const userRepository = new UserRepository();
 const creationAccountRepository = new CreationAccountRepository();
 
 // services
@@ -13,3 +14,4 @@ export const creationAccountService = new CreationAccountService(
   creationAccountRepository,
   userRepository
 );
+export const authService = new AuthService(userRepository);

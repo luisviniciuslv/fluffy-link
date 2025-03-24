@@ -8,6 +8,8 @@ import { InvalidPayloadException } from "../../exceptions/invalid-payload-except
 import { PostNotFound } from "../../exceptions/post-not-found";
 import { Unauthorized } from "../../exceptions/unauthorized-exception";
 import { UserAlreadyExistsException } from "../../exceptions/user-already-exists";
+import { RedirectPayloadIsNotValid } from "../../exceptions/redirect-payload-not-valid";
+import { UsernameOrEmailOrPasswordNotProvided } from "../../exceptions/username-email-or-password-not-provided";
 
 export interface ErrorResponse {
   message: string;
@@ -38,5 +40,9 @@ export const errorHandler = (
     res.status(409).json({ message: err.message }).send();
   else if (err instanceof UserNotFoundException)
     res.status(404).json({ message: err.message }).send();
-  else res.status(500).json({ message: "Internal Server Error" }).send();
+  else if (err instanceof RedirectPayloadIsNotValid)
+    res.status(400).json({ message: err.message }).send
+  else if (err instanceof UsernameOrEmailOrPasswordNotProvided)
+    res.status(400).json({ message: err.message }).send();
+  else{console.log(err); res.status(500).json({ message: "Internal Server Error" }).send();}
 };

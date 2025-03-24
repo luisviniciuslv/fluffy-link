@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export interface ICreationDTO {
+  username: string;
   email: string;
   password: string;
   code: string;

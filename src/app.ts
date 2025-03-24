@@ -7,6 +7,7 @@ import userRouter from "./api/routes/user.routes";
 import dbConsts from "./shared/constants/database";
 import { DatabaseUriNotFoundException } from "./exceptions/database-uri-not-found";
 import mongoose from "mongoose";
+import authRouter from "./api/routes/auth.routes"
 
 export class App {
   private _server: Application;
@@ -32,6 +33,7 @@ export class App {
   private setRoutes() {
     this._server.use("/createAcc", creationAccountRouter);
     this._server.use("/user", userRouter);
+    this._server.use("/auth", authRouter)
   }
 
   private setErrorHandler() {
@@ -49,7 +51,7 @@ export class App {
 
       mongoose.set("strictQuery", true);
       const server = await mongoose.connect(
-        `${dbConsts.DATABASE_ADDRESS}/AuthAPI`
+        `${dbConsts.DATABASE_ADDRESS}`
       );
 
       console.log(

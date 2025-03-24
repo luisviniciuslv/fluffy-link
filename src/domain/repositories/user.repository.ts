@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose";
 import { ICreateUserDTO, IUser, Redirect } from "../entities/user.entity";
 import { IUserRepository } from "../interfaces/user.repository.interface";
 import UserModel from "./model/user.model";
@@ -7,9 +8,12 @@ export default class UserRepository implements IUserRepository {
     return new UserModel(account).save();
   };
 
-  public findById = async (id: string): Promise<IUser | null> => {
-    return await UserModel.findById(id);
-  };
+  findByUsername(username: string): Promise<IUser | null> {
+    return UserModel.findOne({ username });
+  }
+
+  public findById = async (_id: ObjectId): Promise<IUser | null> => 
+    UserModel.findById(_id).exec();
 
   public findByEmail = async (email: string): Promise<IUser | null> => {
     return await UserModel.findOne({ email });
@@ -19,6 +23,6 @@ export default class UserRepository implements IUserRepository {
     await UserModel.deleteOne({ email });
   };
 
-  public update = async (id: string, user: IUser): Promise<IUser | null> =>
+  public update = async (id: ObjectId, user: IUser): Promise<IUser | null> =>
     UserModel.findByIdAndUpdate(id, user, { new: true });
 }

@@ -4,6 +4,7 @@ import { ICreationAccount } from "../../entities/creationAccount.entity";
 const filedIsRequires = [true, "Field is required"];
 
 const CreationAccountSchema = new Schema({
+  username: { type: String, required: filedIsRequires },
   email: { type: String, required: filedIsRequires },
   password: { type: String, required: filedIsRequires },
   code: { type: String, required: filedIsRequires },
