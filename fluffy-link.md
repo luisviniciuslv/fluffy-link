@@ -16,9 +16,16 @@ A aplicação é construída utilizando **Node.js**, **Express**, **Mongoose** p
 
 Para melhor compreensão e utilização da aplicação, siga a ordem abaixo ao ler os documentos que estão na pasta docs:
 
-1. **[Criação de Conta](criacaoDeContaDoc.md)**Este documento explica como criar uma conta no Fluffy-Link, incluindo o fluxo de solicitação de criação e verificação do código de validação.
-2. **[Autenticação](authDoc.md)**Após criar uma conta, leia este documento para entender como realizar login e utilizar o token JWT para acessar endpoints protegidos.
-3. **[Gerenciamento de Redirects](redirectsDoc.md)**
+1. **[Configuração do Arquivo .env](docs/configDotEnv.md)**  
+   Este documento explica como configurar o arquivo `.env` para garantir o funcionamento adequado da aplicação, incluindo a conexão com o banco de dados e o envio de e-mails.
+
+2. **[Criação de Conta](docs/criacaoDeContaDoc.md)**  
+   Este documento explica como criar uma conta no Fluffy-Link, incluindo o fluxo de solicitação de criação e verificação do código de validação.
+
+3. **[Autenticação](docs/authDoc.md)**  
+   Após criar uma conta, leia este documento para entender como realizar login e utilizar o token JWT para acessar endpoints protegidos.
+
+4. **[Gerenciamento de Redirects](docs/redirectsDoc.md)**  
    Por fim, leia este documento para aprender a criar, listar e deletar redirects personalizados, além de entender as regras de configuração de links.
 
 ---
