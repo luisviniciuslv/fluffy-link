@@ -4,11 +4,9 @@ import UserService from "../domain/services/user.service";
 import CreationAccountService from "../domain/services/creationAccount.service";
 import AuthService from "../domain/services/auth.service";
 
-// repositories
 export const userRepository = new UserRepository();
 const creationAccountRepository = new CreationAccountRepository();
 
-// services
 export const userService = new UserService(userRepository);
 export const creationAccountService = new CreationAccountService(
   creationAccountRepository,
