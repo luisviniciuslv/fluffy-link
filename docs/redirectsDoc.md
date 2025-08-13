@@ -28,7 +28,7 @@
 
 **  ]**
 
-**}**
+**}```**
 
 * **`_id`** : Identificador único do redirect.
 * **`ext`** : Extensão única para acessar o redirect.
